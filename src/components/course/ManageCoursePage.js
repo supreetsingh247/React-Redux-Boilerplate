@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 //import {browserHistory} from 'react-router';
-import toastr from 'toastr';
 import {loadAuthors} from '../../actions/authorActions';
 
 
@@ -43,13 +42,11 @@ class ManageCoursePage extends React.Component {
         this.props.actions.saveCourse(this.state.course)
             .then(() => this.redirect())
                 .catch(error => {
-                    toastr.error(error);
                     this.setState({saving:false})});
     }
 
     redirect() {
         this.context.router.push('/courses'); //Alternative to browserHistory.push(browserHistory is obsolete now)
-        toastr.success('Course Saved');
         this.setState({saving:false});
     }
     //Passing down data via props
