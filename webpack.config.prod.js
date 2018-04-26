@@ -30,10 +30,26 @@ export default {
     ],
     module: {
         rules: [
-            {test: /\.js$/, include: path.join(__dirname, 'src'), loader: 'babel-loader'},
-            {test: /(\.css)$/, use: ExtractTextPlugin.extract({
-                fallback: "css-loader?sourceMap"
-            })},
+            {
+                test: /\.js$/, 
+                include: path.join(__dirname, 'src'), 
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                      presets: ['es2015']
+                    }
+                }
+            },
+            {
+                test: /(\.css)$/, 
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ]},
             {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
             {test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000'},
             {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
